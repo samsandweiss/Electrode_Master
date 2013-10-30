@@ -18,20 +18,27 @@ public class Player : MonoBehaviour {
 	
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		
 		//Debug.Log(gameObject.transform.rotation.);
 		
 		if (Input.GetAxisRaw ("Horizontal") < 0) {
 			//moves the player to the left with smooth movement
-			movement = Vector3.left * movementSpeed * Time.deltaTime;
-			gameObject.transform.Translate (movement);
+			
+			rigidbody.AddForce(Vector3.left*10);
+			
+			
+		//	movement = Vector3.left * movementSpeed * Time.deltaTime;
+		//	gameObject.transform.Translate (movement);
 		}
 		
 		if (Input.GetAxisRaw ("Horizontal") > 0) {
 			//moves the player to the left with smooth movement
-			movement = Vector3.right * movementSpeed * Time.deltaTime;
-			gameObject.transform.Translate (movement);
+			
+			rigidbody.AddForce(Vector3.right*10);
+			
+		//	movement = Vector3.right * movementSpeed * Time.deltaTime;
+		//	gameObject.transform.Translate (movement);
 
 		}
 		
@@ -50,6 +57,10 @@ public class Player : MonoBehaviour {
 		if ((Input.GetKeyDown (KeyCode.Space) && atTheDoor)) {
 			door.GetComponent<Door>().Open();
 			Debug.Log("Door should have opened");
+		}
+		
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			rigidbody.AddForce(Vector3.up*50);
 		}
 		
 	}
