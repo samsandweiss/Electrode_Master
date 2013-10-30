@@ -2,11 +2,12 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
+	public bool hasEnergy = false;
+	public bool atTheDoor = false;
 	public float movementSpeed = 1.0f;
-	public Rigidbody doorLight;
 	public Rigidbody door;
-	public Color readyColor = Color.green;
-	public Color openColor = Color.black;
+	public Light doorLight;
+	public Color holdingEnergy = Color.yellow;
 	public TextMesh successText;
 	private Vector3 movement = new Vector3 (0.0f, 0.0f, 0.0f);
 	
@@ -46,15 +47,41 @@ public class Player : MonoBehaviour {
 			gameObject.transform.Translate (movement);
 		}
 		
+		if ((Input.GetKeyDown (KeyCode.Space) && atTheDoor)) {
+			door.GetComponent<Door>().Open();
+			Debug.Log("Door should have opened");
+		}
+		
 	}
 	
 	void OnTriggerEnter(Collider otherCollider) {
 		
 		if (otherCollider.gameObject.name.Contains("TeslaCoil")) {
-			Debug.Log ("Tesla Coil has been hit!");
-			doorLight.gameObject.renderer.material.SetColor ("_Color", readyColor);
-			door.gameObject.renderer.material.SetColor ("_Color", openColor);
-			successText.gameObject.renderer.enabled = true;
+			otherCollider.gameObject.GetComponent<TeslaCoil>().ShowMessage();
+			hasEnergy = true;
+			gameObject.renderer.material.color = holdingEnergy;
+		}
+		
+		if (otherCollider.gameObject.name.Contains("Door")) {
+			if (hasEnergy) {
+				otherCollider.gameObject.GetComponent<Door>().ShowUnlockedMessage();
+				atTheDoor = true;
+			} else {
+				otherCollider.gameObject.GetComponent<Door>().ShowLockedMessage();
+			}
 		}
 	}
+	
+	void OnTriggerExit(Collider otherCollider) {
+		if (otherCollider.gameObject.name.Contains("Door")) {
+			otherCollider.gameObject.GetComponent<Door>().HideMessage();
+			atTheDoor = false;
+		}
+		
+		if (otherCollider.gameObject.name.Contains("TeslaCoil")) {
+			otherCollider.gameObject.GetComponent<TeslaCoil>().HideMessage();
+			atTheDoor = false;
+		}
+	}
+	
 }
