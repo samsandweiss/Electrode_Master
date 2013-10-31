@@ -50,7 +50,7 @@ function LateUpdate () {
 	transform.position -= currentRotation * Vector3.forward * distance;
 
 	// Set the height of the camera
-	transform.position.y = currentHeight;
+	//transform.position.y = currentHeight;
 	
 	// Always look at the target
 	transform.LookAt (target);

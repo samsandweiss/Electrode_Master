@@ -11,6 +11,9 @@ public class Player : MonoBehaviour {
 	public TextMesh successText;
 	private Vector3 movement = new Vector3 (0.0f, 0.0f, 0.0f);
 	
+	private float chargeValue = 1.000f;
+	private float chargeSpeed = 5.000f;
+	
 	// Use this for initialization
 	void Start () {
 		successText.gameObject.renderer.enabled = false;
@@ -25,7 +28,7 @@ public class Player : MonoBehaviour {
 		if (Input.GetAxisRaw ("Horizontal") < 0) {
 			//moves the player to the left with smooth movement
 			
-			rigidbody.AddForce(Vector3.left*10);
+			rigidbody.AddForce(Vector3.left*20);
 			
 			
 		//	movement = Vector3.left * movementSpeed * Time.deltaTime;
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour {
 		if (Input.GetAxisRaw ("Horizontal") > 0) {
 			//moves the player to the left with smooth movement
 			
-			rigidbody.AddForce(Vector3.right*10);
+			rigidbody.AddForce(Vector3.right*20);
 			
 		//	movement = Vector3.right * movementSpeed * Time.deltaTime;
 		//	gameObject.transform.Translate (movement);
@@ -54,13 +57,13 @@ public class Player : MonoBehaviour {
 			gameObject.transform.Translate (movement);
 		}
 		
-		if ((Input.GetKeyDown (KeyCode.Space) && atTheDoor)) {
+		if ((Input.GetKeyDown (KeyCode.F) && atTheDoor)) {
 			door.GetComponent<Door>().Open();
 			Debug.Log("Door should have opened");
 		}
 		
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			rigidbody.AddForce(Vector3.up*50);
+			rigidbody.AddForce(Vector3.up*100);
 		}
 		
 	}
@@ -83,6 +86,13 @@ public class Player : MonoBehaviour {
 		}
 	}
 	
+	void OnTriggerStay(Collider otherCollider) {
+		if (otherCollider.gameObject.name.Contains("TeslaCoil")) {
+		charge();
+		}
+	}
+		
+	
 	void OnTriggerExit(Collider otherCollider) {
 		if (otherCollider.gameObject.name.Contains("Door")) {
 			otherCollider.gameObject.GetComponent<Door>().HideMessage();
@@ -94,5 +104,9 @@ public class Player : MonoBehaviour {
 			atTheDoor = false;
 		}
 	}
-	
+	void charge () {
+		chargeValue += Time.deltaTime*chargeSpeed;
+		Debug.Log(chargeValue);
+		Debug.Log(Time.deltaTime);
+}
 }
