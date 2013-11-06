@@ -7,7 +7,7 @@ public class TeslaCoil : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		coilText.gameObject.renderer.enabled = false;
+//		coilText.gameObject.renderer.enabled = false;
 	}
 	
 	// Update is called once per frame

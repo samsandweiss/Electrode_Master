@@ -60,29 +60,38 @@ public class Player : MonoBehaviour
 			gameObject.renderer.material.color = holdingEnergy;
 		}
 		
-		if (otherCollider.gameObject.name.Contains ("Door")) {
-			if (hasEnergy) {
-				otherCollider.gameObject.GetComponent<Door> ().ShowUnlockedMessage ();
-				atTheDoor = true;
-			} else {
-				otherCollider.gameObject.GetComponent<Door> ().ShowLockedMessage ();
-			}
-		}
+//		if (otherCollider.gameObject.name.Contains ("Door")) {
+//			if (hasEnergy) {
+//				otherCollider.gameObject.GetComponent<Door> ().ShowUnlockedMessage ();
+//				atTheDoor = true;
+//			} else {
+//				otherCollider.gameObject.GetComponent<Door> ().ShowLockedMessage ();
+//			}
+//		}
+		
 	}
 	
-	void OnTriggerStay (Collider otherCollider)
-	{
+	void OnTriggerStay (Collider otherCollider) {
+		
 		if (otherCollider.gameObject.name.Contains ("TeslaCoil")) {
 			charge ();
+		}
+		
+		if (otherCollider.gameObject.name.Contains ("Switch")) {
+			if (Input.GetKey (KeyCode.G)) {
+				if (otherCollider.gameObject.GetComponent<Switch>().activated == false) {
+					otherCollider.gameObject.GetComponent<Switch>().Activate();	
+				}
+			}
 		}
 	}
 	
 	void OnTriggerExit (Collider otherCollider)
 	{
-		if (otherCollider.gameObject.name.Contains ("Door")) {
-			otherCollider.gameObject.GetComponent<Door> ().HideMessage ();
-			atTheDoor = false;
-		}
+//		if (otherCollider.gameObject.name.Contains ("Door")) {
+//			otherCollider.gameObject.GetComponent<Door> ().HideMessage ();
+//			atTheDoor = false;
+//		}
 		
 		if (otherCollider.gameObject.name.Contains ("TeslaCoil")) {
 			otherCollider.gameObject.GetComponent<TeslaCoil> ().HideMessage ();
