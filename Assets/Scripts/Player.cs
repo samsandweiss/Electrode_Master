@@ -16,9 +16,12 @@ public class Player : MonoBehaviour
 	public Light doorLight;
 	public Color holdingEnergy = Color.yellow;
 	public TextMesh successText;
-
-	private float chargeValue = 1.000f;
-	private float chargeSpeed = 5.000f;
+	
+	public float minChargeValue = 0.00f;
+	public float maxChargeValue = 20.0f;
+	public float drainSpeed = 1.000f;
+	public float chargeValue = 1.000f;
+	public float chargeSpeed = 5.000f;
 	private Vector3 moveDirection = Vector3.zero;
 	
 	// Use this for initialization
@@ -78,9 +81,11 @@ public class Player : MonoBehaviour
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("Switch")) {
-			if (Input.GetKey (KeyCode.G)) {
+			if (Input.GetKey (KeyCode.Return)) {
 				if (otherCollider.gameObject.GetComponent<Switch>().activated == false) {
-					otherCollider.gameObject.GetComponent<Switch>().Activate();	
+					otherCollider.gameObject.GetComponent<Switch>().Activate();
+					drainCharge();
+					Debug.Log (chargeValue);
 				}
 			}
 		}
@@ -101,8 +106,18 @@ public class Player : MonoBehaviour
 
 	void charge ()
 	{
-		chargeValue += Time.deltaTime * chargeSpeed;
-		Debug.Log (chargeValue);
-		Debug.Log (Time.deltaTime);
+		if (chargeValue < maxChargeValue) {
+			chargeValue += Time.deltaTime * chargeSpeed;
+			Debug.Log (chargeValue);
+			Debug.Log (Time.deltaTime);
+		}
+	}
+	
+	void drainCharge() {
+		if (chargeValue > minChargeValue) {
+			chargeValue -= Time.deltaTime * drainSpeed;
+			Debug.Log (chargeValue);
+			Debug.Log (Time.deltaTime);
+		}
 	}
 }

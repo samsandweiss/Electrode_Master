@@ -28,8 +28,6 @@ public class TrapDoor : MonoBehaviour {
 	public void Activate() {
 		if (upPosition == false) {
 			transform.RotateAround(rotationCenter.position, Vector3.forward, rotationSpeed * Time.deltaTime);	
-		} else {
-			transform.RotateAround(rotationCenter.position, Vector3.back, rotationSpeed * Time.deltaTime);	
-		}
+		} 
 	}
 }
