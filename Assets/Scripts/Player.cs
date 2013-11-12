@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+		switchTrapDoor = GameObject.Find("SwitchTrapDoor");
 	}
 	
 	
@@ -77,13 +77,11 @@ public class Player : MonoBehaviour {
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
-			//if (Input.GetKey (KeyCode.Return)) {
-				if (otherCollider.gameObject.GetComponent<Switch>().activated != true) {
-					otherCollider.gameObject.GetComponent<Switch>().Activate();
-					drainCharge();
-					//Debug.Log (chargeValue);
-				}
-			//}
+			if (Input.GetKey (KeyCode.Return)) {
+				activateTrapDoor();
+				drainCharge();
+				//Debug.Log (chargeValue);
+			}
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("SwitchDoor")) {
@@ -94,9 +92,9 @@ public class Player : MonoBehaviour {
 			}
 		}
 		
-		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
+		if (otherCollider.gameObject.name.Contains ("SwitchElevator")) {
 			if (Input.GetKey (KeyCode.Return)) {
-				otherCollider.gameObject.GetComponent<Switch>().Activate();
+				otherCollider.gameObject.GetComponent<SwitchElevator>().Activate();
 				drainCharge();
 				//Debug.Log (chargeValue);
 			}
@@ -138,4 +136,7 @@ public class Player : MonoBehaviour {
 		
 	}
 	
+	void activateTrapDoor() {
+		switchTrapDoor.gameObject.GetComponent<Switch>().Activate();
+	}
 }
