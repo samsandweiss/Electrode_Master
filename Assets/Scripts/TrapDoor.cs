@@ -8,7 +8,7 @@ public class TrapDoor : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		upPosition = false;
 	}
 	
 	// Update is called once per frame
@@ -24,7 +24,7 @@ public class TrapDoor : MonoBehaviour {
 	
 	public void Activate() {
 		if (upPosition == false) {
-			transform.RotateAround(rotationCenter.position, Vector3.forward, rotationSpeed * Time.deltaTime);	
-		} 
+			transform.RotateAround(rotationCenter.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+		}
 	}
 }
