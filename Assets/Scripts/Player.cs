@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
+	GameObject switchTrapDoor;
+	
 	//bools for triggering doors and energy
 	public bool hasEnergy = false;
 	public bool atTheDoor = false;
@@ -15,7 +16,6 @@ public class Player : MonoBehaviour
 	public Rigidbody door;
 	public Light doorLight;
 	public Color holdingEnergy = Color.yellow;
-	public TextMesh successText;
 	
 	public float minChargeValue = 0.00f;
 	public float maxChargeValue = 20.0f;
@@ -25,16 +25,14 @@ public class Player : MonoBehaviour
 	private Vector3 moveDirection = Vector3.zero;
 	
 	// Use this for initialization
-	void Start ()
-	{
-		successText.gameObject.renderer.enabled = false;
+	void Start () {
+		switchTrapDoor = GameObject.Find("SwitchTrapDoor");
 	}
 	
 	
 	// Update is called once per frame
-	void Update ()
-	{
-		
+	void Update () {
+
 		CharacterController controller = GetComponent<CharacterController> ();
 		if (controller.isGrounded) {
 			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
@@ -58,19 +56,17 @@ public class Player : MonoBehaviour
 	{
 		
 		if (otherCollider.gameObject.name.Contains ("TeslaCoil")) {
-			otherCollider.gameObject.GetComponent<TeslaCoil> ().ShowMessage ();
 			hasEnergy = true;
 			gameObject.renderer.material.color = holdingEnergy;
 		}
 		
-//		if (otherCollider.gameObject.name.Contains ("Door")) {
-//			if (hasEnergy) {
-//				otherCollider.gameObject.GetComponent<Door> ().ShowUnlockedMessage ();
-//				atTheDoor = true;
-//			} else {
-//				otherCollider.gameObject.GetComponent<Door> ().ShowLockedMessage ();
-//			}
-//		}
+		if (otherCollider.gameObject.name.Contains ("Platform")) {
+			gameObject.transform.parent = otherCollider.gameObject.transform;
+		}
+		
+		if (otherCollider.gameObject.tag.Equals ("Finish")) {
+			Application.LoadLevel(1);
+		}
 		
 	}
 	
@@ -80,13 +76,27 @@ public class Player : MonoBehaviour
 			charge ();
 		}
 		
-		if (otherCollider.gameObject.name.Contains ("Switch")) {
+		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
 			if (Input.GetKey (KeyCode.Return)) {
-				if (otherCollider.gameObject.GetComponent<Switch>().activated == false) {
-					otherCollider.gameObject.GetComponent<Switch>().Activate();
-					drainCharge();
-					Debug.Log (chargeValue);
-				}
+				activateTrapDoor();
+				drainCharge();
+				//Debug.Log (chargeValue);
+			}
+		}
+		
+		if (otherCollider.gameObject.name.Contains ("SwitchDoor")) {
+			if (Input.GetKey (KeyCode.Return)) {
+				otherCollider.gameObject.GetComponent<SwitchDoor>().Activate();
+				drainCharge();
+				//Debug.Log (chargeValue);
+			}
+		}
+		
+		if (otherCollider.gameObject.name.Contains ("SwitchElevator")) {
+			if (Input.GetKey (KeyCode.Return)) {
+				otherCollider.gameObject.GetComponent<SwitchElevator>().Activate();
+				drainCharge();
+				//Debug.Log (chargeValue);
 			}
 		}
 	}
@@ -99,8 +109,12 @@ public class Player : MonoBehaviour
 //		}
 		
 		if (otherCollider.gameObject.name.Contains ("TeslaCoil")) {
-			otherCollider.gameObject.GetComponent<TeslaCoil> ().HideMessage ();
 			atTheDoor = false;
+		}
+		
+		if (otherCollider.gameObject.name.Contains ("Platform")) {
+			gameObject.transform.parent = null;
+			Debug.Log("Unparented");
 		}
 	}
 
@@ -108,16 +122,21 @@ public class Player : MonoBehaviour
 	{
 		if (chargeValue < maxChargeValue) {
 			chargeValue += Time.deltaTime * chargeSpeed;
-			Debug.Log (chargeValue);
-			Debug.Log (Time.deltaTime);
+			//Debug.Log (chargeValue);
+			//Debug.Log (Time.deltaTime);
 		}
 	}
 	
 	void drainCharge() {
 		if (chargeValue > minChargeValue) {
 			chargeValue -= Time.deltaTime * drainSpeed;
-			Debug.Log (chargeValue);
-			Debug.Log (Time.deltaTime);
+			//Debug.Log (chargeValue);
+			//Debug.Log (Time.deltaTime);
 		}
+		
+	}
+	
+	void activateTrapDoor() {
+		switchTrapDoor.gameObject.GetComponent<Switch>().Activate();
 	}
 }

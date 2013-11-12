@@ -9,40 +9,24 @@ public class Door : MonoBehaviour {
 	public Light doorLight;
 	public TextMesh doorText;
 	
+	public Color lockedColor = Color.red;
 	public Color readyColor = Color.green;
 	public Color openColor = Color.black;
 	// Use this for initialization
 	void Start () {
-	
+		doorLight.light.color = lockedColor;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-		if (open) {
-			doorText.GetComponent<TextMesh>().text = openText;
-		}
 	}
-	
+	 
 	public void Open () {
 		//sets the color of the door to black and sets the color of the light to green 
-		gameObject.renderer.material.color = openColor;
+		//gameObject.renderer.material.color = openColor;
 		doorLight.light.color = readyColor;
 		open = true;
 		
-	}
-	
-	public void ShowLockedMessage () {
-		doorText.gameObject.renderer.enabled = true;
-		doorText.GetComponent<TextMesh>().text = lockedText;
-	}
-	
-	public void ShowUnlockedMessage () {
-		doorText.gameObject.renderer.enabled = true;
-		doorText.GetComponent<TextMesh>().text = unlockedText;
-	}
-	
-	public void HideMessage () {
-		doorText.gameObject.renderer.enabled = false;
 	}
 }

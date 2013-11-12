@@ -19,9 +19,6 @@ public class TrapDoor : MonoBehaviour {
 			upPosition = false;	
 		}
 		
-		Debug.Log(gameObject.transform.eulerAngles.z);
-		Debug.Log(upPosition);
-		
 	}
 			
 	

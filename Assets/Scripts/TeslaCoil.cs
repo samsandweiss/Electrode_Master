@@ -14,13 +14,4 @@ public class TeslaCoil : MonoBehaviour {
 	void Update () {
 	
 	}
-	
-	public void ShowMessage () {
-		coilText.gameObject.renderer.enabled = true;
-		coilText.GetComponent<TextMesh>().text = activatedText;
-	}
-	
-	public void HideMessage () {
-		coilText.gameObject.renderer.enabled = false;
-	}
 }
