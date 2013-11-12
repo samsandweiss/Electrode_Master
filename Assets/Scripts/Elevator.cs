@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class Elevator : MonoBehaviour {
 	public Transform bottomBoundary;
 	public Transform topBoundary;
@@ -9,6 +10,7 @@ public class Elevator : MonoBehaviour {
 	private Vector3 movement = new Vector3 (0.0f, 0.0f, 0.0f);
 	private bool atBottom;
 	private bool atTop;
+	public int state;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +42,32 @@ public class Elevator : MonoBehaviour {
 			
 		if (otherCollider.gameObject.name.Contains ("ElevatorTop")) {
 			atTop = true;
+		}
+
+		if (state == 1) {
+			//move elevator down
+		}
+		if (state == 3) {
+			//move elevator up
+		}
+		
+	}
+	
+	void onTriggerStay () {
+		//if elevator hits bottom
+		//then state ++ and set bool elevator bottom to true
+		
+		//if elevator hits top
+		//then state ++ elevator movement and se
+		
+		
+	
+	}
+	
+	void activate() {
+		state ++;
+		if (state > 3) {
+			state = 0;
 		}
 	}
 }
