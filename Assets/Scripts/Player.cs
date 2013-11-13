@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
 	public Light doorLight;
 	public Color holdingEnergy = Color.yellow;
 	
+	public SwitchElevator currentSwitch;
 	public float minChargeValue = 0.00f;
 	public float maxChargeValue = 20.0f;
 	public float drainSpeed = 1.000f;
@@ -32,7 +33,11 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
+		if ((currentSwitch != null) && (Input.GetKey (KeyCode.Return))) {
+			currentSwitch.Activate();
+		}
+		
 		CharacterController controller = GetComponent<CharacterController> ();
 		if (controller.isGrounded) {
 			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
@@ -68,6 +73,12 @@ public class Player : MonoBehaviour {
 			Application.LoadLevel(1);
 		}
 		
+		if (otherCollider.gameObject.name.Equals ("SwitchElevator")) {
+			 currentSwitch = otherCollider.gameObject.GetComponent<SwitchElevator>();
+		}
+		
+				Debug.Log("getkeyreturn "+Input.GetKey(KeyCode.Return));
+		Debug.Log("touch" + otherCollider.name);
 	}
 	
 	void OnTriggerStay (Collider otherCollider) {
@@ -77,7 +88,7 @@ public class Player : MonoBehaviour {
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
-			if (Input.GetKey (KeyCode.Return)) {
+			if (Input.GetKeyUp (KeyCode.Return)) {
 				activateTrapDoor();
 				drainCharge();
 				//Debug.Log (chargeValue);
@@ -91,14 +102,16 @@ public class Player : MonoBehaviour {
 				//Debug.Log (chargeValue);
 			}
 		}
-		
-		if (otherCollider.gameObject.name.Contains ("SwitchElevator")) {
-			if (Input.GetKey (KeyCode.Return)) {
-				otherCollider.gameObject.GetComponent<SwitchElevator>().Activate();
-				drainCharge();
-				//Debug.Log (chargeValue);
-			}
-		}
+
+
+//		if (otherCollider.gameObject.name.Contains ("SwitchElevator")) {
+//			if (Input.GetKey (KeyCode.Return)) {
+//				
+//				otherCollider.gameObject.GetComponent<SwitchElevator>().Activate();
+//				drainCharge();
+//				//Debug.Log (chargeValue);
+//			}
+//		}
 	}
 	
 	void OnTriggerExit (Collider otherCollider)
@@ -115,6 +128,10 @@ public class Player : MonoBehaviour {
 		if (otherCollider.gameObject.name.Contains ("Platform")) {
 			gameObject.transform.parent = null;
 			Debug.Log("Unparented");
+		}
+		
+		if (otherCollider.gameObject.name.Equals ("SwitchElevator")) {
+			currentSwitch = null;
 		}
 	}
 
