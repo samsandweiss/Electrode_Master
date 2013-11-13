@@ -65,9 +65,9 @@ public class Player : MonoBehaviour {
 			gameObject.renderer.material.color = holdingEnergy;
 		}
 		
-//		if (otherCollider.gameObject.name.Contains ("Platform")) {
-//			gameObject.transform.parent = otherCollider.gameObject.transform;
-//		}
+		if (otherCollider.gameObject.name.Contains ("Platform")) {
+			gameObject.transform.parent = otherCollider.gameObject.transform;
+		}
 		
 		if (otherCollider.gameObject.tag.Equals ("Finish")) {
 			Application.LoadLevel(1);
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour {
 			if (Input.GetKey (KeyCode.Return)) {
 				otherCollider.gameObject.GetComponent<SwitchDoor>().Activate();
 				drainCharge();
-				Debug.Log (chargeValue);
+				//Debug.Log (chargeValue);
 			}
 		}
 
@@ -133,11 +133,6 @@ public class Player : MonoBehaviour {
 		if (otherCollider.gameObject.name.Equals ("SwitchElevator")) {
 			currentSwitch = null;
 		}
-
-//		if (otherCollider.gameObject.name.Contains ("Platform")) {
-//			gameObject.transform.parent = null;
-//			Debug.Log("Unparented");
-//		}
 	}
 
 	void charge ()
