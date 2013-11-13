@@ -22,25 +22,27 @@ public class TrapDoor : MonoBehaviour
 		if (movingForward) {
 			//moving forward code
 			if (rotationCenter.eulerAngles.z >= 360) {
-				upPosition = true;
+				isActivated = false;
+				//upPosition = true;
 			} else {
 				if (isActivated) {
-					rotationCenter.Rotate(Vector3.down, rotationSpeed * Time.deltaTime);
-					upPosition = false;	
+					rotationCenter.Rotate (Vector3.down, rotationSpeed * Time.deltaTime);
+					//upPosition = false;	
 				}
 			}
+		
 		} else {
 			//moving backward code
 			if (rotationCenter.eulerAngles.z <= 270) {
-				downPosition = true;
+				//downPosition = true;
 			} else {
 				if (isActivated) {
-					rotationCenter.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-					downPosition = false;	
+					rotationCenter.Rotate (Vector3.up, rotationSpeed * Time.deltaTime);
+					//downPosition = false;	
 				}
 			}
-		}
 		
+		}
 		
 		
 	}
@@ -53,9 +55,5 @@ public class TrapDoor : MonoBehaviour
 			movingForward = false;
 		else
 			movingForward = true;
-		
-//		if (upPosition == false) {
-//			transform.RotateAround(rotationCenter.position, Vector3.forward, rotationSpeed * Time.deltaTime);	
-//		} 
 	}
 }

@@ -77,8 +77,8 @@ public class Player : MonoBehaviour {
 			 currentSwitch = otherCollider.gameObject.GetComponent<SwitchElevator>();
 		}
 		
-				Debug.Log("getkeyreturn "+Input.GetKey(KeyCode.Return));
-		Debug.Log("touch" + otherCollider.name);
+		//Debug.Log("getkeyreturn "+Input.GetKey(KeyCode.Return));
+		//Debug.Log("touch" + otherCollider.name);
 	}
 	
 	void OnTriggerStay (Collider otherCollider) {
@@ -89,14 +89,15 @@ public class Player : MonoBehaviour {
 		
 		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
 			if (Input.GetKeyUp (KeyCode.Return)) {
-				activateTrapDoor();
+				//activate trap door
+				switchTrapDoor.gameObject.GetComponent<Switch>().Activate();
 				drainCharge();
 				//Debug.Log (chargeValue);
 			}
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("SwitchDoor")) {
-			if (Input.GetKey (KeyCode.Return)) {
+			if (Input.GetKeyUp (KeyCode.Return)) {
 				otherCollider.gameObject.GetComponent<SwitchDoor>().Activate();
 				drainCharge();
 				//Debug.Log (chargeValue);
@@ -146,14 +147,10 @@ public class Player : MonoBehaviour {
 	
 	void drainCharge() {
 		if (chargeValue > minChargeValue) {
-			chargeValue -= Time.deltaTime * drainSpeed;
+			chargeValue -= 20f;
 			//Debug.Log (chargeValue);
 			//Debug.Log (Time.deltaTime);
 		}
 		
-	}
-	
-	void activateTrapDoor() {
-		switchTrapDoor.gameObject.GetComponent<Switch>().Activate();
 	}
 }
