@@ -18,5 +18,6 @@ public class SwitchElevator : MonoBehaviour {
 	public void Activate() {
 		elevator.gameObject.GetComponent<Elevator>().Activate();
 	}
+	}
 }
 
