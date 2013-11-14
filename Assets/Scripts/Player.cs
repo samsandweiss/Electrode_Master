@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if ((currentSwitch != null) && (Input.GetKeyDown (KeyCode.Return))) {
+		if ((currentSwitch != null) && (Input.GetKey (KeyCode.Return))) {
 			currentSwitch.Activate();
 		}
 		
