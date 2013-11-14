@@ -9,6 +9,7 @@ public class Elevator : MonoBehaviour
 	public float reverseMovementSpeed = -1.0f;
 	private Vector3 movement = new Vector3 (0.0f, 0.0f, 0.0f);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private bool atBottom;
 	private bool atTop;
 	public int state = 0;
@@ -17,6 +18,8 @@ public class Elevator : MonoBehaviour
 	public bool isActivated;
 =======
 >>>>>>> ecfc662aecf11d73b739b5c83c8814ef243e12ea
+=======
+>>>>>>> 29427f615eb0f2b6f158fd58a7587443dc5214d6
 	public bool movingDown;
 	public int counter; 
 	public int modCounter;
@@ -28,6 +31,7 @@ public class Elevator : MonoBehaviour
 	}
 	
 	// Update is called once per frame
+<<<<<<< HEAD
 <<<<<<< HEAD
 	void Update ()
 	{
@@ -53,6 +57,10 @@ public class Elevator : MonoBehaviour
 =======
 	void Update () {
 		
+=======
+	void Update () {
+		
+>>>>>>> 29427f615eb0f2b6f158fd58a7587443dc5214d6
 		if (modCounter == 0) {
 			//elevator at top or stopped
 		
@@ -66,7 +74,10 @@ public class Elevator : MonoBehaviour
 		
 		if (modCounter == 2) {
 			//elevator at bottom or stopped (preparing to move up)
+<<<<<<< HEAD
 >>>>>>> ecfc662aecf11d73b739b5c83c8814ef243e12ea
+=======
+>>>>>>> 29427f615eb0f2b6f158fd58a7587443dc5214d6
 			
 		}
 		
@@ -122,15 +133,21 @@ public class Elevator : MonoBehaviour
 			
 		if (otherCollider.gameObject.name.Contains ("ElevatorTop")) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//state ++;
 			atTop = true;
 			
 =======
+=======
+>>>>>>> 29427f615eb0f2b6f158fd58a7587443dc5214d6
 			counter = 0;
 			modCounter = 0;
 			
 	
+<<<<<<< HEAD
 >>>>>>> ecfc662aecf11d73b739b5c83c8814ef243e12ea
+=======
+>>>>>>> 29427f615eb0f2b6f158fd58a7587443dc5214d6
 		}
 
 	
@@ -156,6 +173,7 @@ public class Elevator : MonoBehaviour
 	public void Activate ()
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		counter+1
 		counter % 3;
 		isActivated = true; 
@@ -167,11 +185,16 @@ public class Elevator : MonoBehaviour
 			movingDown = true;
 		}
 =======
+=======
+>>>>>>> 29427f615eb0f2b6f158fd58a7587443dc5214d6
 		counter++;
 		modCounter = (counter % 4);
 			Debug.Log(modCounter);
 
+<<<<<<< HEAD
 >>>>>>> ecfc662aecf11d73b739b5c83c8814ef243e12ea
+=======
+>>>>>>> 29427f615eb0f2b6f158fd58a7587443dc5214d6
 		
 //		Ye old code
 //		isActivated = true; 
