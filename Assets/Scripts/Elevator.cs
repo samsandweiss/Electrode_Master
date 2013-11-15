@@ -8,15 +8,12 @@ public class Elevator : MonoBehaviour
 	public float movementSpeed = 1.0f;
 	public float reverseMovementSpeed = -1.0f;
 	private Vector3 movement = new Vector3 (0.0f, 0.0f, 0.0f);
-<<<<<<< HEAD
+	
 	private bool atBottom;
 	private bool atTop;
-	public int state = 0;
-	public int counter = 0;
+
 	
 	public bool isActivated;
-=======
->>>>>>> ecfc662aecf11d73b739b5c83c8814ef243e12ea
 	public bool movingDown;
 	public int counter; 
 	public int modCounter;
@@ -28,29 +25,6 @@ public class Elevator : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-<<<<<<< HEAD
-	void Update ()
-	{
-		if (movingDown) {
-			//moving down code
-			if (atBottom) {
-				isActivated = false;
-				
-			} else {
-				if (isActivated) {
-				movement = Vector3.down * movementSpeed * Time.deltaTime;
-				gameObject.transform.Translate (movement);
-				movingDown = false;
-						
-				}
-			}
-		
-		} else {
-			Debug.Log("movingDown = false");
-			//moving up code
-			if (atTop) {
-			    isActivated = false;
-=======
 	void Update () {
 		
 		if (modCounter == 0) {
@@ -65,8 +39,7 @@ public class Elevator : MonoBehaviour
 		}
 		
 		if (modCounter == 2) {
-			//elevator at bottom or stopped (preparing to move up)
->>>>>>> ecfc662aecf11d73b739b5c83c8814ef243e12ea
+			//elevator at bottom or stopped (preparing to move up
 			
 		}
 		
@@ -78,39 +51,6 @@ public class Elevator : MonoBehaviour
 	}
 		
 	
-		//all ye old code
-//	{
-//		if (movingDown) {
-//			//moving down code
-//			if (atBottom) {
-//				isActivated = false;
-//			
-//				
-//			} else {
-//				if (isActivated) {
-//					movement = Vector3.down * movementSpeed * Time.deltaTime;
-//					gameObject.transform.Translate (movement);
-//						
-//				}
-//			}
-//		
-//		} else {
-//			
-//			//moving up code
-//			if (atTop) {
-//				isActivated = false;
-//			   
-//			} else {
-//				if (isActivated) {
-//					Debug.Log("Reverse Speed activated");
-//					movement = Vector3.up * movementSpeed * Time.deltaTime;
-//					gameObject.transform.Translate (movement);
-//					Debug.Log ("the code is supposed to move the elevator up");
-//				}
-//			}
-//		}
-//	}
-	
 	void OnTriggerEnter (Collider otherCollider)
 	{
 		
@@ -121,20 +61,12 @@ public class Elevator : MonoBehaviour
 
 			
 		if (otherCollider.gameObject.name.Contains ("ElevatorTop")) {
-<<<<<<< HEAD
-			//state ++;
-			atTop = true;
-			
-=======
 			counter = 0;
 			modCounter = 0;
-			
-	
->>>>>>> ecfc662aecf11d73b739b5c83c8814ef243e12ea
-		}
-
+		
 	
 		
+	}
 	}
 	
 //	void onTriggerExit (Collider otherCollider)
@@ -155,23 +87,9 @@ public class Elevator : MonoBehaviour
 	
 	public void Activate ()
 	{
-<<<<<<< HEAD
-		counter+1
-		counter % 3;
-		isActivated = true; 
-		
-		if (movingDown) {
-			movingDown = false;
-		}
-		else {
-			movingDown = true;
-		}
-=======
 		counter++;
 		modCounter = (counter % 4);
 			Debug.Log(modCounter);
-
->>>>>>> ecfc662aecf11d73b739b5c83c8814ef243e12ea
 		
 //		Ye old code
 //		isActivated = true; 
