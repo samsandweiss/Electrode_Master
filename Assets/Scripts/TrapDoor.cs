@@ -56,12 +56,8 @@ public class TrapDoor : MonoBehaviour
 		if (otherCollider.gameObject.name.Contains ("TrapDoorTop")) {
 			counter = 2;
 			modCounter = 2;
-			
-	
 		}
-
 	
- 		
  	}
  	
 	public void Activate ()
