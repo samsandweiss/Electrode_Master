@@ -90,7 +90,7 @@ public class Player : MonoBehaviour {
 		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
 			if (Input.GetKeyUp (KeyCode.Return)) {
 				//activate trap door
-				switchTrapDoor.gameObject.GetComponent<Switch>().Activate();
+				switchTrapDoor.gameObject.GetComponent<sTrapDoor>().Activate();
 				drainCharge();
 				//Debug.Log (chargeValue);
 			}

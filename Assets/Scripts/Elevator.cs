@@ -17,6 +17,7 @@ public class Elevator : MonoBehaviour
 	public bool movingDown;
 	public int counter; 
 	public int modCounter;
+	public int elevatorRequiredCharge = 20;
 	
 	// Use this for initialization
 	void Start ()

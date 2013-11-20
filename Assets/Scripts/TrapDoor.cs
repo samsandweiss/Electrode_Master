@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class TrapDoor : MonoBehaviour
 {
 	public Transform rotationCenter;
@@ -8,14 +7,14 @@ public class TrapDoor : MonoBehaviour
 	public bool upPosition;
 	public bool downPosition;
 	public bool movingForward;
-	public bool isActivated;
+	public bool isLocked;
 	public int counter;
 	public int modCounter;
 	
 	// Use this for initialization
 	void Start ()
 	{
-	
+		isLocked = false;
 	}
 	
 	// Update is called once per frame
@@ -24,8 +23,8 @@ public class TrapDoor : MonoBehaviour
 		if (modCounter == 0) {
 			//trap door at bottom or stopped
 		}
- 		
- 		
+		
+		
 		if (modCounter == 1) {
 			//trap door moving up
 			rotationCenter.Rotate (Vector3.down, rotationSpeed * Time.deltaTime);
@@ -40,11 +39,9 @@ public class TrapDoor : MonoBehaviour
 			//trap door moving down
 			rotationCenter.Rotate (Vector3.up, rotationSpeed * Time.deltaTime);
 		}
-			
+		
 	}
-
-		
-		
+	
 	void OnTriggerEnter (Collider otherCollider)
 	{
 		
@@ -52,19 +49,24 @@ public class TrapDoor : MonoBehaviour
 			counter = 0;
 			modCounter = 0;
 		}
-			
+		
 		if (otherCollider.gameObject.name.Contains ("TrapDoorTop")) {
 			counter = 2;
 			modCounter = 2;
 		}
+		
+	}
 	
- 	}
- 	
 	public void Activate ()
-	{	
-		counter++;
-		modCounter = (counter % 4);
-		Debug.Log (modCounter);
-
+	{
+		if (!isLocked) {
+			counter++;
+			modCounter = (counter % 4);
+			Debug.Log (modCounter);
+		}
+	}
+	public void Lock ()
+	{
+		isLocked = true;
 	}
 }
