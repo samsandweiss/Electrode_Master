@@ -24,6 +24,8 @@ public class Player : MonoBehaviour {
 	public float chargeValue = 1.000f;
 	public float chargeSpeed = 5.000f;
 	private Vector3 moveDirection = Vector3.zero;
+
+	GameObject ParticleSystem;
 	
 	// Use this for initialization
 	void Start () {
