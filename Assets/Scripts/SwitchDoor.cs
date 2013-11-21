@@ -16,11 +16,7 @@ public class SwitchDoor : MonoBehaviour {
 	}
 	
 	public void Activate() {
-		if (door.gameObject.GetComponent<Door>().unlocked == false) {
-			door.gameObject.GetComponent<Door>().Unlock();
-		} else {
-			door.gameObject.GetComponent<Door>().Open();
-		}
+		door.gameObject.GetComponent<Door>().Open();
 	}
 }
 

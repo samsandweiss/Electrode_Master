@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Door : MonoBehaviour {
-	public bool unlocked;
+	public bool open;
 	public string lockedText;
 	public string unlockedText;
 	public string openText;
@@ -15,7 +15,6 @@ public class Door : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		doorLight.light.color = lockedColor;
-		unlocked = false;
 	}
 	
 	// Update is called once per frame
@@ -23,14 +22,11 @@ public class Door : MonoBehaviour {
 	
 	}
 	 
-	public void Unlock () {
+	public void Open () {
 		//sets the color of the door to black and sets the color of the light to green 
 		//gameObject.renderer.material.color = openColor;
 		doorLight.light.color = readyColor;
-		unlocked = true;
-	}
-
-	public void Open () {
-		gameObject.renderer.material.color = openColor;
+		open = true;
+		
 	}
 }

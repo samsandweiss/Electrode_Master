@@ -16,7 +16,6 @@ public class Player : MonoBehaviour {
 	public Rigidbody door;
 	public Light doorLight;
 	public Color holdingEnergy = Color.yellow;
-
 	
 	public SwitchElevator currentSwitch;
 	public float minChargeValue = 0.00f;
@@ -36,8 +35,6 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		Debug.Log(chargeValue);
 		
 		if ((currentSwitch != null) && (Input.GetKeyDown (KeyCode.Return))) {
 			currentSwitch.Activate();
@@ -55,6 +52,11 @@ public class Player : MonoBehaviour {
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.Move (moveDirection * Time.deltaTime);
  
+		
+		if ((Input.GetKeyDown (KeyCode.F) && atTheDoor)) {
+			door.GetComponent<Door> ().Open ();
+			Debug.Log ("Door should have opened");
+		}	
 	}
 	
 	void OnTriggerEnter (Collider otherCollider)
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour {
 		}
 		
 		if (otherCollider.gameObject.tag.Equals ("Finish")) {
-			//Application.LoadLevel(1);
+			Application.LoadLevel(1);
 		}
 
 		if (otherCollider.gameObject.tag.Equals ("Reload")) {
@@ -107,7 +109,6 @@ public class Player : MonoBehaviour {
 				//Debug.Log (chargeValue);
 			}
 		}
-
 
 
 //		if (otherCollider.gameObject.name.Contains ("SwitchElevator")) {
