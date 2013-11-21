@@ -29,6 +29,7 @@ public class TrapDoor : MonoBehaviour
 			//trap door moving up
 			rotationCenter.Rotate (Vector3.down, rotationSpeed * Time.deltaTime);
 		}
+
 		
 		if (modCounter == 2) {
 			//trap door at top or stopped (preparing to move up)
