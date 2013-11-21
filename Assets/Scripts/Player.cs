@@ -74,6 +74,10 @@ public class Player : MonoBehaviour {
 		if (otherCollider.gameObject.tag.Equals ("Finish")) {
 			Application.LoadLevel(1);
 		}
+
+		if (otherCollider.gameObject.tag.Equals ("Reload")) {
+			Application.LoadLevel(0);
+		}
 		
 		if (otherCollider.gameObject.name.Equals ("SwitchElevator")) {
 			 currentSwitch = otherCollider.gameObject.GetComponent<SwitchElevator>();
