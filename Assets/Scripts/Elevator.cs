@@ -90,7 +90,6 @@ public class Elevator : MonoBehaviour
 	{
 		counter++;
 		modCounter = (counter % 4);
-			Debug.Log(modCounter);
 		
 //		Ye old code
 //		isActivated = true; 

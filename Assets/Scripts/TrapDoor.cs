@@ -62,7 +62,6 @@ public class TrapDoor : MonoBehaviour
 		if (!isLocked) {
 			counter++;
 			modCounter = (counter % 4);
-			Debug.Log (modCounter);
 		}
 	}
 	public void Lock ()

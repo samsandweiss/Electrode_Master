@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 	GameObject switchTrapDoor;
+	public ParticleSystem particleSystem;
 	
 	//bools for triggering doors and energy
 	public bool hasEnergy = false;
@@ -16,10 +17,12 @@ public class Player : MonoBehaviour {
 	public Rigidbody door;
 	public Light doorLight;
 	public Color holdingEnergy = Color.yellow;
+	public Material noEnergy;
+	public Material Energy;
 	
 	public SwitchElevator currentSwitch;
 	public float minChargeValue = 0.00f;
-	public float maxChargeValue = 20.0f;
+	public float maxChargeValue = 20.00000000f;
 	public float drainSpeed = 1.000f;
 	public float chargeValue = 1.000f;
 	public float chargeSpeed = 5.000f;
@@ -35,7 +38,18 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		if (chargeValue > minChargeValue) {
+			particleSystem.enableEmission = true;
+			gameObject.renderer.material = Energy;
+		} else {
+			particleSystem.enableEmission = false;
+			gameObject.renderer.material = noEnergy;
+
+		}
+
+		Debug.Log(chargeValue);
+
 		if ((currentSwitch != null) && (Input.GetKeyDown (KeyCode.Return))) {
 			currentSwitch.Activate();
 		}
@@ -64,7 +78,7 @@ public class Player : MonoBehaviour {
 		
 		if (otherCollider.gameObject.name.Contains ("TeslaCoil")) {
 			hasEnergy = true;
-			gameObject.renderer.material.color = holdingEnergy;
+			//gameObject.renderer.material.color = holdingEnergy;
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("Platform")) {
@@ -73,6 +87,7 @@ public class Player : MonoBehaviour {
 		
 		if (otherCollider.gameObject.tag.Equals ("Finish")) {
 			Application.LoadLevel(1);
+			Debug.Log("should have loaded the next level");
 		}
 
 		if (otherCollider.gameObject.tag.Equals ("Reload")) {
@@ -90,7 +105,7 @@ public class Player : MonoBehaviour {
 	void OnTriggerStay (Collider otherCollider) {
 		
 		if (otherCollider.gameObject.name.Contains ("TeslaCoil")) {
-			charge ();
+			charge();
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
