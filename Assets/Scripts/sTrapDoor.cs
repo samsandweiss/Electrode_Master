@@ -4,7 +4,7 @@ using System.Collections;
 public class sTrapDoor : MonoBehaviour {
 	public TrapDoor trapdoor;
 	public bool activated;
-	public bool trololo;
+	public int trapDoorChrg = 20;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +17,6 @@ public class sTrapDoor : MonoBehaviour {
 	}
 	
 	public void Activate() {
-		//this comment was added to troll everyone. trololololololololololololololollolololollololol
 		trapdoor.gameObject.GetComponent<TrapDoor>().Activate();
 	}
 }
