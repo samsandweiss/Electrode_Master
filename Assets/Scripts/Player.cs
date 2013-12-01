@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 	GameObject switchTrapDoor;
 	public ParticleSystem particleSystem;
 	
@@ -31,13 +32,19 @@ public class Player : MonoBehaviour {
 	GameObject ParticleSystem;
 	
 	// Use this for initialization
-	void Start () {
-		switchTrapDoor = GameObject.Find("SwitchTrapDoor");
+	void Start ()
+	{
+		switchTrapDoor = GameObject.Find ("SwitchTrapDoor");
 	}
 	
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
+
+		if (Input.GetButtonDown ("Fire2")) {
+			Application.LoadLevel (0);
+		}
 
 		if (chargeValue > minChargeValue) {
 			particleSystem.enableEmission = true;
@@ -48,10 +55,10 @@ public class Player : MonoBehaviour {
 
 		}
 
-		Debug.Log(chargeValue);
+		//Debug.Log(chargeValue);
 
-		if ((currentSwitch != null) && (Input.GetKeyDown (KeyCode.Return))) {
-			currentSwitch.Activate();
+		if ((currentSwitch != null) && (Input.GetButtonDown ("Fire1"))) {
+			currentSwitch.Activate ();
 		}
 		
 		CharacterController controller = GetComponent<CharacterController> ();
@@ -86,41 +93,42 @@ public class Player : MonoBehaviour {
 		}
 		
 		if (otherCollider.gameObject.tag.Equals ("Finish")) {
-			Application.LoadLevel(1);
-			Debug.Log("should have loaded the next level");
+			Application.LoadLevel (1);
+			Debug.Log ("should have loaded the next level");
 		}
 
 		if (otherCollider.gameObject.tag.Equals ("Reload")) {
-			Application.LoadLevel(0);
+			Application.LoadLevel (0);
 		}
 		
 		if (otherCollider.gameObject.name.Equals ("SwitchElevator")) {
-			 currentSwitch = otherCollider.gameObject.GetComponent<SwitchElevator>();
+			currentSwitch = otherCollider.gameObject.GetComponent<SwitchElevator> ();
 		}
 		
 		//Debug.Log("getkeyreturn "+Input.GetKey(KeyCode.Return));
 		//Debug.Log("touch" + otherCollider.name);
 	}
 	
-	void OnTriggerStay (Collider otherCollider) {
+	void OnTriggerStay (Collider otherCollider)
+	{
 		
 		if (otherCollider.gameObject.name.Contains ("TeslaCoil")) {
-			charge();
+			charge ();
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
-			if (Input.GetKeyUp (KeyCode.Return)) {
+			if (Input.GetButtonDown ("Fire1")) {
 				//activate trap door
-				switchTrapDoor.gameObject.GetComponent<sTrapDoor>().Activate();
-				drainCharge();
+				switchTrapDoor.gameObject.GetComponent<sTrapDoor> ().Activate ();
+				drainCharge ();
 				//Debug.Log (chargeValue);
 			}
 		}
 		
 		if (otherCollider.gameObject.name.Contains ("SwitchDoor")) {
-			if (Input.GetKeyUp (KeyCode.Return)) {
-				otherCollider.gameObject.GetComponent<SwitchDoor>().Activate();
-				drainCharge();
+			if (Input.GetButtonDown ("Fire1")) {
+				otherCollider.gameObject.GetComponent<SwitchDoor> ().Activate ();
+				drainCharge ();
 				//Debug.Log (chargeValue);
 			}
 		}
@@ -149,7 +157,7 @@ public class Player : MonoBehaviour {
 		
 		if (otherCollider.gameObject.name.Contains ("Platform")) {
 			gameObject.transform.parent = null;
-			Debug.Log("Unparented");
+			Debug.Log ("Unparented");
 		}
 		
 		if (otherCollider.gameObject.name.Equals ("SwitchElevator")) {
@@ -166,7 +174,8 @@ public class Player : MonoBehaviour {
 		}
 	}
 	
-	void drainCharge() {
+	void drainCharge ()
+	{
 		if (chargeValue > minChargeValue) {
 			chargeValue -= 20f;
 			//Debug.Log (chargeValue);
