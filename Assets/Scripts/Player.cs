@@ -76,8 +76,9 @@ public class Player : MonoBehaviour
 		}
 
 		//logic to activate the current switch that the player is interacting with.
-		if ((currentSwitch != null) && (Input.GetButtonDown ("Fire1"))) {
+		if ((currentSwitch != null) && (Input.GetButtonDown ("Fire1")) && (chargeValue > elevatorCV)) {
 			currentSwitch.Activate ();
+			drainCharge ();
 		}
 
 		//logic to active doors
@@ -111,9 +112,6 @@ public class Player : MonoBehaviour
 		if (otherCollider.gameObject.name.Equals ("SwitchElevator")) {
 			currentSwitch = otherCollider.gameObject.GetComponent<SwitchElevator> ();
 		}
-		
-		//Debug.Log("getkeyreturn "+Input.GetKey(KeyCode.Return));
-		//Debug.Log("touch" + otherCollider.name);
 	}
 	
 	void OnTriggerStay (Collider otherCollider)
@@ -132,7 +130,7 @@ public class Player : MonoBehaviour
 			}
 		}
 		
-		if (otherCollider.gameObject.name.Contains ("SwitchDoor")) {
+		if (otherCollider.gameObject.name.Contains ("SwitchDoor") && chargeValue > doorCV) {
 			if (Input.GetButtonDown ("Fire1")) {
 				otherCollider.gameObject.GetComponent<SwitchDoor> ().Activate ();
 				drainCharge ();
