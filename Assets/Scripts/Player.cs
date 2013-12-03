@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
 	GameObject switchTrapDoor;
 	public ParticleSystem particleSystem;
+	GameObject ParticleSystem;
 	
 	//bools for triggering doors and energy
 	public bool hasEnergy = false;
@@ -29,8 +30,11 @@ public class Player : MonoBehaviour
 	public float chargeSpeed = 5.000f;
 	private Vector3 moveDirection = Vector3.zero;
 
-	GameObject ParticleSystem;
-	
+
+	private float trapDoorCV = 5.0f;
+	private float elevatorCV = 5.0f;
+	private float doorCV = 5.0f;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -41,26 +45,9 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		Debug.Log(chargeValue);
 
-		if (Input.GetButtonDown ("Fire2")) {
-			Application.LoadLevel (0);
-		}
-
-		if (chargeValue > minChargeValue) {
-			particleSystem.enableEmission = true;
-			gameObject.renderer.material = Energy;
-		} else {
-			particleSystem.enableEmission = false;
-			gameObject.renderer.material = noEnergy;
-
-		}
-
-		//Debug.Log(chargeValue);
-
-		if ((currentSwitch != null) && (Input.GetButtonDown ("Fire1"))) {
-			currentSwitch.Activate ();
-		}
-		
+		//character controller movement.
 		CharacterController controller = GetComponent<CharacterController> ();
 		if (controller.isGrounded) {
 			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
@@ -72,8 +59,28 @@ public class Player : MonoBehaviour
 		
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.Move (moveDirection * Time.deltaTime);
- 
-		
+
+
+		if (Input.GetButtonDown ("Fire2")) {
+			Application.LoadLevel (0);
+		}
+
+		// logic for particle system for charge
+		if (chargeValue > minChargeValue) {
+			particleSystem.enableEmission = true;
+			gameObject.renderer.material = Energy;
+		} else {
+			particleSystem.enableEmission = false;
+			gameObject.renderer.material = noEnergy;
+
+		}
+
+		//logic to activate the current switch that the player is interacting with.
+		if ((currentSwitch != null) && (Input.GetButtonDown ("Fire1"))) {
+			currentSwitch.Activate ();
+		}
+
+		//logic to active doors
 		if ((Input.GetKeyDown (KeyCode.F) && atTheDoor)) {
 			door.GetComponent<Door> ().Open ();
 			Debug.Log ("Door should have opened");
@@ -116,7 +123,7 @@ public class Player : MonoBehaviour
 			charge ();
 		}
 		
-		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
+		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor") && chargeValue > trapDoorCV) {
 			if (Input.GetButtonDown ("Fire1")) {
 				//activate trap door
 				switchTrapDoor.gameObject.GetComponent<sTrapDoor> ().Activate ();
@@ -132,24 +139,10 @@ public class Player : MonoBehaviour
 				//Debug.Log (chargeValue);
 			}
 		}
-
-
-//		if (otherCollider.gameObject.name.Contains ("SwitchElevator")) {
-//			if (Input.GetKey (KeyCode.Return)) {
-//				
-//				otherCollider.gameObject.GetComponent<SwitchElevator>().Activate();
-//				drainCharge();
-//				//Debug.Log (chargeValue);
-//			}
-//		}
 	}
 	
 	void OnTriggerExit (Collider otherCollider)
 	{
-//		if (otherCollider.gameObject.name.Contains ("Door")) {
-//			otherCollider.gameObject.GetComponent<Door> ().HideMessage ();
-//			atTheDoor = false;
-//		}
 		
 		if (otherCollider.gameObject.name.Contains ("TeslaCoil")) {
 			atTheDoor = false;
@@ -177,10 +170,14 @@ public class Player : MonoBehaviour
 	void drainCharge ()
 	{
 		if (chargeValue > minChargeValue) {
-			chargeValue -= 20f;
+			chargeValue -= 5f;
 			//Debug.Log (chargeValue);
 			//Debug.Log (Time.deltaTime);
 		}
+		if (chargeValue < 5 ) {
+			chargeValue = 0;
+		}
+
 		
 	}
 }

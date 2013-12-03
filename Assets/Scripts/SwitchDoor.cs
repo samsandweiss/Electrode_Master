@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//this code is for the switch on doors
+
 public class SwitchDoor : MonoBehaviour {
 	public Door door;
 	public bool activated;
 	
-	// Use this for initialization
+
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		
 	}

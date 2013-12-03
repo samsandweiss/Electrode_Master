@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//this code is for the switch on the elevator
 public class SwitchElevator : MonoBehaviour {
 	public Elevator elevator;
 	public bool activated;

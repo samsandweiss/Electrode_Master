@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Lamp : MonoBehaviour
 {
+
+	//This code is for lamp flicker.
+
 	public enum lightType
 	{
 		flicker,
@@ -13,6 +16,8 @@ public class Lamp : MonoBehaviour
 	public Light light;
 	public float speed;
 	public float noise;
+
+
 	// Use this for initialization
 	void Start ()
 	{

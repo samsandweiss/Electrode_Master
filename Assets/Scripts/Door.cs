@@ -3,26 +3,24 @@ using System.Collections;
 
 public class Door : MonoBehaviour
 {
+	//variables to control door and aspects
 	public bool unlocked;
-	public string lockedText;
-	public string unlockedText;
-	public string openText;
 	public Light doorLight;
-	public TextMesh doorText;
 	public int loadLevel;
-	
+
+	//material colors for door
 	public Color lockedColor = Color.red;
 	public Color readyColor = Color.green;
 	public Color openColor = Color.black;
-	// Use this for initialization
+
 	void Start ()
 	{
+		//by default all doors are locked
 		doorLight.light.color = lockedColor;
 		unlocked = false;
 		gameObject.collider.isTrigger = false;
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
 	{
 		

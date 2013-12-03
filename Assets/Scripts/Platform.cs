@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//this script parents the player to the elevator so it doesn't fall through.
+
 public class Platform : MonoBehaviour {
 	public Vector3 parentedPosition = new Vector3 (1, 1, 1);
 
@@ -13,12 +15,5 @@ public class Platform : MonoBehaviour {
 	void Update () {
 	
 	}
-	
-	void OnTriggerEnter (Collider otherCollider) {
-		
-	}
-	
-	void OnTriggerExit (Collider otherCollider) {
-		
-	}
+
 }

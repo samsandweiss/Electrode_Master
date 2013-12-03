@@ -4,9 +4,6 @@ public class TrapDoor : MonoBehaviour
 {
 	public Transform rotationCenter;
 	public int rotationSpeed = 50;
-	public bool upPosition;
-	public bool downPosition;
-	public bool movingForward;
 	public bool isLocked;
 	public int counter;
 	public int modCounter;

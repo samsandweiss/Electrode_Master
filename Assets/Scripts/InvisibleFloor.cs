@@ -3,15 +3,14 @@ using System.Collections;
 
 public class InvisibleFloor : MonoBehaviour
 {
+	//the class is for reseting levels after falls. 
 	public int loadLevel;
-
-	// Use this for initialization
+	
 	void Start ()
 	{
 	
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
 	{
 	

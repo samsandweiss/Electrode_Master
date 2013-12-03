@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//This is the script for the main menu. it allows the world to pan from letf to right.
+
 public class MoveCamera : MonoBehaviour
 {
 	public TextMesh title;
