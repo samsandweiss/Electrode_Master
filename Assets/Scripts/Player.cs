@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	//bools for triggering doors and energy
 	public bool hasEnergy = false;
 	public bool atTheDoor = false;
+	public bool facingRight = true;
 	
 	//values for character jump and move speed 
 	public float speed = 6.0F;
@@ -35,17 +36,25 @@ public class Player : MonoBehaviour
 	private float elevatorCV = 5.0f;
 	private float doorCV = 5.0f;
 
+	// Reference to the player's animator component.
+	private Animator anim;					
 	// Use this for initialization
+
 	void Start ()
 	{
 		switchTrapDoor = GameObject.Find ("SwitchTrapDoor");
+		anim = GetComponent<Animator> ();
 	}
 	
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		Debug.Log(chargeValue);
+		float h = Input.GetAxis ("Horizontal");
+		anim.SetFloat ("Speed", Mathf.Abs (h));
+
+
+		Debug.Log (chargeValue);
 
 		//character controller movement.
 		CharacterController controller = GetComponent<CharacterController> ();
@@ -85,7 +94,16 @@ public class Player : MonoBehaviour
 		if ((Input.GetKeyDown (KeyCode.F) && atTheDoor)) {
 			door.GetComponent<Door> ().Open ();
 			Debug.Log ("Door should have opened");
-		}	
+		}
+
+		// If the input is moving the player right and the player is facing left...
+		if (h > 0 && !facingRight)
+			// ... flip the player.
+			Flip ();
+		// Otherwise if the input is moving the player left and the player is facing right...
+		else if (h < 0 && facingRight)
+			// ... flip the player.
+			Flip ();
 	}
 	
 	void OnTriggerEnter (Collider otherCollider)
@@ -172,10 +190,19 @@ public class Player : MonoBehaviour
 			//Debug.Log (chargeValue);
 			//Debug.Log (Time.deltaTime);
 		}
-		if (chargeValue < 5 ) {
+		if (chargeValue < 5) {
 			chargeValue = 0;
 		}
+	}
 
+	void Flip ()
+	{
+		// Switch the way the player is labelled as facing.
+		facingRight = !facingRight;
 		
+		// Multiply the player's x local scale by -1.
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
 	}
 }

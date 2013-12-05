@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c000215f5f302458c818630cc78b4300
+guid: f6cd73fcff8404001b555a9b16dc4f08
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -23,7 +23,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: 1
+    filterMode: -1
     aniso: 1
     mipBias: -1
     wrapMode: 1
@@ -41,7 +41,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_0
+    - name: running_0
       rect:
         serializedVersion: 2
         x: 43
@@ -50,7 +50,7 @@ TextureImporter:
         height: 181
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_1
+    - name: running_1
       rect:
         serializedVersion: 2
         x: 191
@@ -59,7 +59,7 @@ TextureImporter:
         height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_2
+    - name: running_2
       rect:
         serializedVersion: 2
         x: 367
@@ -68,7 +68,7 @@ TextureImporter:
         height: 173
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_3
+    - name: running_3
       rect:
         serializedVersion: 2
         x: 575
@@ -77,7 +77,7 @@ TextureImporter:
         height: 189
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_4
+    - name: running_4
       rect:
         serializedVersion: 2
         x: 739
@@ -86,7 +86,7 @@ TextureImporter:
         height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_5
+    - name: running_5
       rect:
         serializedVersion: 2
         x: 30
@@ -95,7 +95,7 @@ TextureImporter:
         height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_6
+    - name: running_6
       rect:
         serializedVersion: 2
         x: 190
@@ -104,7 +104,7 @@ TextureImporter:
         height: 182
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_7
+    - name: running_7
       rect:
         serializedVersion: 2
         x: 363
@@ -113,7 +113,7 @@ TextureImporter:
         height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_8
+    - name: running_8
       rect:
         serializedVersion: 2
         x: 554
@@ -122,7 +122,7 @@ TextureImporter:
         height: 188
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: volt_sprite_sheet_by_kwelfury-d5hx008_9
+    - name: running_9
       rect:
         serializedVersion: 2
         x: 737
