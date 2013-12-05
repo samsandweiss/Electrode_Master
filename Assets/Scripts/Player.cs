@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
 	void Start ()
 	{
 		switchTrapDoor = GameObject.Find ("SwitchTrapDoor");
+		//from 
 		anim = GetComponent<Animator> ();
 	}
 	
