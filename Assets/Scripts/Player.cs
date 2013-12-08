@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 	public bool hasEnergy = false;
 	public bool atTheDoor = false;
 	public bool facingRight = true;
-	
+
 	//values for character jump and move speed 
 	public float speed = 6.0F;
 	public float jumpSpeed = 8.0F;
@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
 	public float chargeValue = 1.000f;
 	public float chargeSpeed = 5.000f;
 	private Vector3 moveDirection = Vector3.zero;
+	public int selectedText = 0;
 
 
 	private float trapDoorCV = 5.0f;
@@ -54,7 +55,6 @@ public class Player : MonoBehaviour
 		float h = Input.GetAxis ("Horizontal");
 		anim.SetFloat ("Speed", Mathf.Abs (h));
 
-
 		Debug.Log (chargeValue);
 
 		//character controller movement.
@@ -71,17 +71,17 @@ public class Player : MonoBehaviour
 		controller.Move (moveDirection * Time.deltaTime);
 
 
-		if (Input.GetButtonDown ("Fire2")) {
-			Application.LoadLevel (0);
-		}
+//		if (Input.GetButtonDown ("Fire2")) {
+//			Application.LoadLevel (0);
+//		}
 
 		// logic for particle system for charge
 		if (chargeValue > minChargeValue) {
 			particleSystem.enableEmission = true;
-			gameObject.renderer.material = Energy;
+			//gameObject.renderer.material = Energy;
 		} else {
 			particleSystem.enableEmission = false;
-			gameObject.renderer.material = noEnergy;
+			//gameObject.renderer.material = noEnergy;
 
 		}
 

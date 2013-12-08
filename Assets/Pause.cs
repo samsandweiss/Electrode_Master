@@ -1,37 +1,26 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-//This is the script for the main menu. it allows the world to pan from letf to right.
-
-public class MoveCamera : MonoBehaviour
+public class Pause : MonoBehaviour
 {
+	bool paused = false;
+	public bool hasBeenPressed;
+	public float waitTime;
+	public int selectedText ;
+	public Color selected;
+	public Color deselected;
 	public TextMesh title;
 	public TextMesh play;
 	public TextMesh credits;
 	public TextMesh quit;
-	public bool hasBeenPressed;
-	public float waitTime;
+
 	
-	public Color selected;
-	public Color deselected;
-	
-	public int selectedText = 0;
-	public float movementSpeed = 1.0f;
-	private Vector3 movement = new Vector3 (0.0f, 0.0f, 0.0f);
-	
-	// Use this for initialization
-	void Start ()
-	{
-		
-		selectedText = 0;
-	}
-	
-	// Update is called once per frame
 	void Update ()
 	{
-		movement = Vector3.left * movementSpeed * Time.deltaTime;
-		gameObject.transform.Translate (movement);
-		
+		Debug.Log (selectedText);
+		if (Input.GetButtonDown ("Fire2"))
+			paused = togglePause ();
+
 		if (!hasBeenPressed) {
 			if (Input.GetAxis ("Vertical") < -0.9) {
 				hasBeenPressed = true;
@@ -83,19 +72,53 @@ public class MoveCamera : MonoBehaviour
 		}  
 	}
 	
-	void OnTriggerEnter (Collider otherCollider)
+	void OnGUI ()
 	{
-		if (otherCollider.gameObject.name.Contains ("End")) {
-			Application.LoadLevel (0);
+		if (paused) {
+			activateText ();
 		}
-		
 	}
 	
+	bool togglePause ()
+	{
+		if (Time.timeScale == 0f) {
+			deactivateText ();
+			Time.timeScale = 1f;
+			return(false);
+		} else {
+			Time.timeScale = 0f;
+			return(true);    
+			activateText ();
+
+		}
+	}
+
+	void activateText ()
+	{
+		title.active = true;
+		play.active = true;
+		credits.active = true;
+		quit.active = true;
+	}
+
+	void deactivateText ()
+	{
+		Debug.Log ("text should be deactivated");
+		title.active = false;
+		play.active = false;
+		credits.active = false;
+		quit.active = false;
+	}
+
 	IEnumerator Wait ()
 	{
-		
+		yield return new WaitForSeconds (waitTime);
+		hasBeenPressed = false;
+	}
+
+	IEnumerator Wait ()
+	{
 		yield return new WaitForSeconds (waitTime);
 		hasBeenPressed = false;
 	}
 }
-
