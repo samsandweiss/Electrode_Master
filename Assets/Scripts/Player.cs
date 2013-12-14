@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
 	public Material Energy;
 	
 	public SwitchElevator currentSwitch;
-	public float minChargeValue = 0.00f;
-	public float maxChargeValue = 20.00000000f;
+	public float minChargeValue;
+	public float maxChargeValue;
 	public float drainSpeed = 1.000f;
 	public float chargeValue = 1.000f;
 	public float chargeSpeed = 5.000f;
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
 		}
 
 		//logic to activate the current switch that the player is interacting with.
-		if ((currentSwitch != null) && (Input.GetButtonDown ("Fire1")) && (chargeValue > elevatorCV)) {
+		if ((currentSwitch != null) && (Input.GetButtonDown ("Fire1")) && (chargeValue >= elevatorCV)) {
 			currentSwitch.Activate ();
 			drainCharge ();
 		}
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
 			charge ();
 		}
 		
-		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor") && chargeValue > trapDoorCV) {
+		if (otherCollider.gameObject.name.Contains ("SwitchTrapDoor") && chargeValue >= trapDoorCV) {
 			if (Input.GetButtonDown ("Fire1")) {
 				//activate trap door
 				switchTrapDoor.gameObject.GetComponent<sTrapDoor> ().Activate ();
@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
 			}
 		}
 		
-		if (otherCollider.gameObject.name.Contains ("SwitchDoor") && chargeValue > doorCV) {
+		if (otherCollider.gameObject.name.Contains ("SwitchDoor") && chargeValue >= doorCV) {
 			if (Input.GetButtonDown ("Fire1")) {
 				otherCollider.gameObject.GetComponent<SwitchDoor> ().Activate ();
 				drainCharge ();
@@ -181,6 +181,10 @@ public class Player : MonoBehaviour
 			chargeValue += Time.deltaTime * chargeSpeed;
 			//Debug.Log (chargeValue);
 			//Debug.Log (Time.deltaTime);
+		}
+
+		if (chargeValue > maxChargeValue) {
+			chargeValue = maxChargeValue;
 		}
 	}
 	

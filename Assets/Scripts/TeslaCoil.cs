@@ -16,7 +16,7 @@ public class TeslaCoil : MonoBehaviour
 
 	void OnTriggerStay (Collider otherCollider)
 	{
-		if (otherCollider.name.Contains ("Player")) {
+		if (otherCollider.name.Contains ("Player") && otherCollider.GetComponent<Player> ().chargeValue < otherCollider.GetComponent<Player> ().maxChargeValue) {
 			Debug.Log ("Tesla coil is being hit");
 			//otherCollider.GetComponent<LightningBolt> ().target = GameObject.transform;
 			emitter.active = true;
