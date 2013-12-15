@@ -4,6 +4,7 @@ using System.Collections;
 public class Lamp : MonoBehaviour
 {
 
+	public AudioClip lightflicker;
 	//This code is for lamp flicker.
 
 	public enum lightType
@@ -21,12 +22,14 @@ public class Lamp : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+
 		light.enabled = false; //Initially turn off Light
 		if (type == lightType.flicker) {
 			StartCoroutine (Flicker ());
 		} else if (type == lightType.pulsate) {
-			
+
 		}
+
 		
 	}
 	
@@ -38,9 +41,12 @@ public class Lamp : MonoBehaviour
 	IEnumerator Flicker ()
 	{
 		light.enabled = true;
+		audio.clip = lightflicker ;
+		audio.Play();
 		float randNoise = Random.Range (-1, 1) * Random.Range (-noise, noise);
 		yield return new WaitForSeconds (speed + randNoise);
 		light.enabled = false;
+		audio.Stop();
 		yield return new WaitForSeconds (speed);
 		StartCoroutine (Flicker ());
 	}

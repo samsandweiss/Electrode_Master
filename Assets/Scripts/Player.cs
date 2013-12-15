@@ -16,13 +16,11 @@ public class Player : MonoBehaviour
 	public float speed = 6.0F;
 	public float jumpSpeed = 8.0F;
 	public float gravity = 20.0F;
-	
 	public Rigidbody door;
 	public Light doorLight;
 	public Color holdingEnergy = Color.yellow;
 	public Material noEnergy;
 	public Material Energy;
-	
 	public SwitchElevator currentSwitch;
 	public float minChargeValue;
 	public float maxChargeValue;
@@ -31,11 +29,14 @@ public class Player : MonoBehaviour
 	public float chargeSpeed = 5.000f;
 	private Vector3 moveDirection = Vector3.zero;
 	public int selectedText = 0;
-
-
 	private float trapDoorCV = 5.0f;
 	private float elevatorCV = 5.0f;
 	private float doorCV = 5.0f;
+
+	//audio code 
+	public bool jumping = false;
+	public AudioClip footsteps;
+	public AudioClip jumpsound;
 
 	// Reference to the player's animator component.
 	private Animator anim;					
@@ -60,15 +61,28 @@ public class Player : MonoBehaviour
 		//character controller movement.
 		CharacterController controller = GetComponent<CharacterController> ();
 		if (controller.isGrounded) {
+			jumping = false;
 			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
 			moveDirection = transform.TransformDirection (moveDirection);
 			moveDirection *= speed;
-			if (Input.GetButton ("Jump"))
+			if (Input.GetButton ("Jump")) {
+				audio.PlayOneShot(jumpsound);
 				moveDirection.y = jumpSpeed; 
+			}
+			if (Input.GetAxis ("Horizontal") == 0 &&!jumping) {
+				Debug.Log ("The Footsteps should be playing");
+				audio.clip = footsteps;
+				audio.Play(); 
+			} 
+
 		}
 		
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.Move (moveDirection * Time.deltaTime);
+		
+
+
+
 
 
 //		if (Input.GetButtonDown ("Fire2")) {
@@ -210,4 +224,12 @@ public class Player : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+	void jumpingsound ()
+	{
+//		audio.clip = jumpsound;
+//		audio.loop = false;
+//		audio.Play ();
+	}
+	
 }
