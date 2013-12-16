@@ -4,8 +4,13 @@ using System.Collections;
 public class TeslaCoil : MonoBehaviour
 {
 	public ParticleEmitter emitter;
+	public AudioClip teslainactive;
+	public AudioClip teslaactive;
+
 	void Start ()
 	{
+		audio.clip = teslainactive;
+		audio.Play();
 	}
 	
 
@@ -20,6 +25,7 @@ public class TeslaCoil : MonoBehaviour
 			Debug.Log ("Tesla coil is being hit");
 			//otherCollider.GetComponent<LightningBolt> ().target = GameObject.transform;
 			emitter.active = true;
+			audio.clip = teslaactive;
 		}
 	}
 
@@ -27,6 +33,7 @@ public class TeslaCoil : MonoBehaviour
 	{
 		if (otherCollider.name.Contains ("Player")) {
 			emitter.active = false;
+			audio.clip = teslainactive;
 		}
 	}
 }
