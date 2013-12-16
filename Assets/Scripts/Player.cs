@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 	private float trapDoorCV = 5.0f;
 	private float elevatorCV = 5.0f;
 	private float doorCV = 5.0f;
+	private bool flag = true; 
 
 	//audio code 
 	public bool jumping = false;
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+	
 		float h = Input.GetAxis ("Horizontal");
 		anim.SetFloat ("Speed", Mathf.Abs (h));
 
@@ -66,16 +68,23 @@ public class Player : MonoBehaviour
 			moveDirection = transform.TransformDirection (moveDirection);
 			moveDirection *= speed;
 			if (Input.GetButton ("Jump")) {
+				jumping = true;
 				audio.PlayOneShot(jumpsound);
 				moveDirection.y = jumpSpeed; 
 			}
-			if (Input.GetAxis ("Horizontal") == 0 &&!jumping) {
+			if (Mathf.Abs(h) > 0 && !jumping && flag) {
 				Debug.Log ("The Footsteps should be playing");
+				flag = false; 
 				audio.clip = footsteps;
-				audio.Play(); 
-			} 
+				audio.Play();
 
+			} else if ( h == 0) 
+			{
+				flag = true;
+				audio.Stop();
+			}
 		}
+		
 		
 		moveDirection.y -= gravity * Time.deltaTime;
 		controller.Move (moveDirection * Time.deltaTime);
@@ -112,13 +121,17 @@ public class Player : MonoBehaviour
 		}
 
 		// If the input is moving the player right and the player is facing left...
-		if (h > 0 && !facingRight)
+		if (h > 0 && !facingRight) {
 			// ... flip the player.
 			Flip ();
+		}
 		// Otherwise if the input is moving the player left and the player is facing right...
-		else if (h < 0 && facingRight)
+		else if (h < 0 && facingRight) {
 			// ... flip the player.
 			Flip ();
+		}
+
+
 	}
 	
 	void OnTriggerEnter (Collider otherCollider)
@@ -225,11 +238,9 @@ public class Player : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-	void jumpingsound ()
-	{
-//		audio.clip = jumpsound;
-//		audio.loop = false;
-//		audio.Play ();
-	}
-	
+void footstepsounds () {
+		audio.clip = footsteps; 
+		audio.PlayOneShot(footsteps);
+
+}
 }
