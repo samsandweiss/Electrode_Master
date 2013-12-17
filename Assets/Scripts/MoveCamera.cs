@@ -56,7 +56,11 @@ public class MoveCamera : MonoBehaviour
 		if (Input.GetButtonDown ("Jump") && selectedText == 0) {
 			Application.LoadLevel (1);
 		}
-		
+
+		if (Input.GetButtonDown ("Jump") && selectedText == 1) {
+			Application.LoadLevel ("Credits");
+		}
+
 		if (Input.GetButtonDown ("Jump") && selectedText == 2) {
 			Application.Quit ();
 		}

@@ -19,6 +19,11 @@ public class Next : MonoBehaviour
 			Debug.Log ("Should load new level");
 			Application.LoadLevel (levelToLoad);
 		}
+
+		if (Input.GetButtonDown ("Back")) {
+			Debug.Log ("Should load menu");
+			Application.LoadLevel (0);
+		}
 	
 	}
 }
