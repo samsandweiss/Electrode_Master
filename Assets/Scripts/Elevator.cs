@@ -18,11 +18,16 @@ public class Elevator : MonoBehaviour
 	public int counter; 
 	public int modCounter;
 	public int elevatorRequiredCharge = 20;
-	
+
+	private bool flag = true; 
+	private bool secondflag = true;
+	public AudioClip mechsound;
+	public AudioClip stopsound;
+
 	// Use this for initialization
 	void Start ()
 	{
-		
+		secondflag = false;
 	}
 	
 	// Update is called once per frame
@@ -30,6 +35,12 @@ public class Elevator : MonoBehaviour
 		
 		if (modCounter == 0) {
 			//elevator at top or stopped
+			flag = true;
+			if (secondflag) {
+				secondflag = false;
+				audio.clip = stopsound;
+				audio.Play();
+			}
 		
 		}
 		
@@ -37,17 +48,34 @@ public class Elevator : MonoBehaviour
 			//elevator moving down
 			movement = Vector3.down * movementSpeed * Time.deltaTime;
 			gameObject.transform.Translate (movement);
+				secondflag = true;
+			if (flag) {
+				flag = false;
+				audio.clip = mechsound;
+				audio.Play();
+			}
 		}
 		
 		if (modCounter == 2) {
 			//elevator at bottom or stopped (preparing to move up
-			
+				flag = true;
+				if (secondflag) {
+					secondflag = false;
+					audio.clip = stopsound;
+					audio.Play();
+				}
 		}
 		
 		if (modCounter == 3) {
 			//elevator moving up
 			movement = Vector3.up * movementSpeed * Time.deltaTime;
 			gameObject.transform.Translate (movement);
+					secondflag = true;
+			if (flag) {
+				flag = false;
+				audio.clip = mechsound;
+				audio.Play();
+			}
 		}
 	}
 		

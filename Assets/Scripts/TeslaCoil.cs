@@ -19,13 +19,22 @@ public class TeslaCoil : MonoBehaviour
 	
 	}
 
+	void OnTriggerEnter (Collider otherCollider) 
+	{
+		if (otherCollider.name.Contains ("Player") && otherCollider.GetComponent<Player> ().chargeValue < otherCollider.GetComponent<Player> ().maxChargeValue) {
+		audio.clip = teslaactive;
+		audio.Play();
+		}
+	}
+
 	void OnTriggerStay (Collider otherCollider)
 	{
 		if (otherCollider.name.Contains ("Player") && otherCollider.GetComponent<Player> ().chargeValue < otherCollider.GetComponent<Player> ().maxChargeValue) {
 			Debug.Log ("Tesla coil is being hit");
+		
 			//otherCollider.GetComponent<LightningBolt> ().target = GameObject.transform;
 			emitter.active = true;
-			audio.clip = teslaactive;
+
 		}
 	}
 
@@ -34,6 +43,7 @@ public class TeslaCoil : MonoBehaviour
 		if (otherCollider.name.Contains ("Player")) {
 			emitter.active = false;
 			audio.clip = teslainactive;
+			audio.Play();
 		}
 	}
 }
