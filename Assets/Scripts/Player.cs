@@ -49,9 +49,10 @@ public class Player : MonoBehaviour
 		switchTrapDoor = GameObject.Find ("SwitchTrapDoor");
 		//from 
 		anim = GetComponent<Animator> ();
+		particleSystem.enableEmission = false;
 	}
 	
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -101,9 +102,11 @@ public class Player : MonoBehaviour
 		// logic for particle system for charge
 		if (chargeValue > minChargeValue) {
 			particleSystem.enableEmission = true;
+			particleSystem.active = true;
 			//gameObject.renderer.material = Energy;
 		} else {
 			particleSystem.enableEmission = false;
+			//particleSystem.active = false;
 			//gameObject.renderer.material = noEnergy;
 
 		}

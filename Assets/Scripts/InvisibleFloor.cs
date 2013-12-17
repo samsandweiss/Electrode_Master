@@ -19,7 +19,7 @@ public class InvisibleFloor : MonoBehaviour
 	public void OnTriggerEnter (Collider otherCollider)
 	{
 		if (otherCollider.name.Contains ("Player")) {
-			Application.LoadLevel (loadLevel);
+			Application.LoadLevel (1);
 			Debug.Log ("Loading Level: " + loadLevel);
 		}
 	}
