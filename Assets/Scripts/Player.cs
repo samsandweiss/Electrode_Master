@@ -71,6 +71,7 @@ public class Player : MonoBehaviour
 			moveDirection *= speed;
 			if (Input.GetButton ("Jump")) {
 				jumping = true;
+				audio.volume = 0.5f;
 				audio.PlayOneShot (jumpsound);
 				moveDirection.y = jumpSpeed; 
 			}
@@ -78,6 +79,7 @@ public class Player : MonoBehaviour
 				Debug.Log ("The Footsteps should be playing");
 				flag = false; 
 				audio.clip = footsteps;
+				audio.volume = 0.5f;
 				audio.Play ();
 
 			} else if (h == 0) {
