@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 	public bool jumping = false;
 	public AudioClip footsteps;
 	public AudioClip jumpsound;
+	public AudioClip noenergyaudio;
 
 	// Reference to the player's animator component.
 	private Animator anim;					
@@ -69,19 +70,18 @@ public class Player : MonoBehaviour
 			moveDirection *= speed;
 			if (Input.GetButton ("Jump")) {
 				jumping = true;
-				audio.PlayOneShot(jumpsound);
+				audio.PlayOneShot (jumpsound);
 				moveDirection.y = jumpSpeed; 
 			}
-			if (Mathf.Abs(h) > 0 && !jumping && flag) {
+			if (Mathf.Abs (h) > 0 && !jumping && flag) {
 				Debug.Log ("The Footsteps should be playing");
 				flag = false; 
 				audio.clip = footsteps;
-				audio.Play();
+				audio.Play ();
 
-			} else if ( h == 0) 
-			{
+			} else if (h == 0) {
 				flag = true;
-				audio.Stop();
+				audio.Stop ();
 			}
 		}
 		
@@ -183,6 +183,15 @@ public class Player : MonoBehaviour
 				//Debug.Log (chargeValue);
 			}
 		}
+
+		if (otherCollider.gameObject.name.Contains ("SwitchDoor") || otherCollider.gameObject.name.Contains ("SwitchTrapDoor")) {
+			if (Input.GetButtonDown ("Fire1")) {
+				if (chargeValue < trapDoorCV) {
+					audio.clip = noenergyaudio;
+					audio.Play ();
+				}
+			}
+		}
 	}
 	
 	void OnTriggerExit (Collider otherCollider)
@@ -238,9 +247,10 @@ public class Player : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-void footstepsounds () {
+	void footstepsounds ()
+	{
 		audio.clip = footsteps; 
-		audio.PlayOneShot(footsteps);
+		audio.PlayOneShot (footsteps);
 
-}
+	}
 }
