@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 	private float trapDoorCV = 5.0f;
 	private float elevatorCV = 5.0f;
 	private float doorCV = 5.0f;
-	private bool flag = true; 
+	private bool flag = true;
 
 	//audio code 
 	public bool jumping = false;

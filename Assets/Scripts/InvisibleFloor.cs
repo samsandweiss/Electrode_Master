@@ -13,14 +13,13 @@ public class InvisibleFloor : MonoBehaviour
 
 	void Update ()
 	{
-	
+		Debug.Log ("Application.loadedLevel =" + Application.loadedLevel);
 	}
 
 	public void OnTriggerEnter (Collider otherCollider)
 	{
 		if (otherCollider.name.Contains ("Player")) {
-			Application.LoadLevel (1);
-			Debug.Log ("Loading Level: " + loadLevel);
+			Application.LoadLevel (Application.loadedLevel);
 		}
 	}
 }
